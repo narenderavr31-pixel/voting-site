@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Top 3 Projects</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: black;
+      color: white;
+    }
+    h1 { font-size: 48px; }
+    .item { font-size: 32px; margin: 20px; }
+  </style>
+</head>
+<body>
+
+<h1>🏆 TOP 3 PROJECTS 🏆</h1>
+<div id="top3"></div>
+
+<script>
+  function showTop3() {
+    let votes = JSON.parse(localStorage.getItem("votes")) || {};
+    let arr = Object.entries(votes).sort((a,b) => b[1]-a[1]).slice(0,3);
+
+    let div = document.getElementById("top3");
+    div.innerHTML = "";
+
+    arr.forEach((p,i) => {
+      div.innerHTML += `<div class="item">${i+1}. ${p[0]} – ${p[1]} votes</div>`;
+    });
+  }
+
+  showTop3();
+  setInterval(showTop3, 1000); // auto refresh every second
+</script>
+
+</body>
+</html>
