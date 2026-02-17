@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project Voting</title>
+  <style>
+    body { font-family: Arial; text-align: center; }
+    button { padding: 12px 20px; margin: 8px; font-size: 18px; width: 300px; }
+  </style>
+</head>
+<body>
+
+<h2>Vote for the Best Project</h2>
+
+<div id="buttons"></div>
+
+<script>
+  let projects = [
+    "Smart Dustbin",
+    "Solar Tracker",
+    "Rain Alarm",
+    "Water Level Indicator",
+    "Line Following Robot",
+    "Automatic Street Light",
+    "Fire Alarm",
+    "Home Automation",
+    "Obstacle Avoider",
+    "Smart Irrigation"
+  ];
+
+  let votes = JSON.parse(localStorage.getItem("votes")) || {};
+
+  function saveVotes() {
+    localStorage.setItem("votes", JSON.stringify(votes));
+  }
+
+  let div = document.getElementById("buttons");
+
+  projects.forEach(p => {
+    if (!votes[p]) votes[p] = 0;
+
+    let btn = document.createElement("button");
+    btn.innerText = "Vote – " + p;
+    btn.onclick = () => {
+      votes[p]++;
+      saveVotes();
+      alert("Vote recorded ✔");
+    };
+    div.appendChild(btn);
+  });
+
+  saveVotes();
+</script>
+
+</body>
+</html>
